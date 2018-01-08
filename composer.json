@@ -1,0 +1,22 @@
+{
+  "name": "reprovinci/kirby.field.builder",
+  "type": "kirby-field",
+  "description": "A builder field for Kirby CMS.",
+  "require": {
+    "composer/installers": "^1.3"
+  },
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Tim Ötting",
+      "email": "tim@whateveryouremailaddresis.com"
+    },
+    {
+      "name": "Elwin Dokter",
+      "email": "elwin@reprovinci.nl"
+    }
+  ],
+  "extra": {
+    "installer-name": "builder"
+  }
+}
