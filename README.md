@@ -2,6 +2,8 @@
 
 This custom field for [Kirby CMS](https://getkirby.com) (v2.4.1 and above) lets you predefine content blocks with different field sets that can then be added and arranged inside the panel (Kirby's backend).
 
+test
+
 ### Blueprint example
 ```yaml
 fields:
