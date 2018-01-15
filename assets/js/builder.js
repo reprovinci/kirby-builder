@@ -34,6 +34,7 @@
         if(offsetFix){
           ui.item.css('margin-top', 0);
         }
+        app.content.reload();
       },
       helper: function(e, ui) {
         ui.children().each(function() {
@@ -52,7 +53,6 @@
         $.post(api, {ids: ids}, function() {
           app.content.reload();
         });
-
       }
     });
   };
