@@ -95,8 +95,10 @@
     return false;
   });
   $(document).on('click', '.quickform .btn-submit', function(e){
+
     e.preventDefault();
-    var fieldID = $(this).closest('.builder-entry').find('.builder-entry-quickform-container').data('quickform-container')
+    var cont = $(this).closest('.builder-entry').find('.builder-entry-quickform-container');
+    var fieldID = cont.data('quickform-container')
     var data = $('.quickform form').serialize().split(fieldID + '-').join('');
     var url = $('.quickform form').attr('action')
     var urlParamSeparator = (url.indexOf('?') > -1) ? '&' : '?'
@@ -104,8 +106,28 @@
       type: "POST",
       url: url + urlParamSeparator,
       data: data,
-      success: function(){
-        app.content.reload();
+      success: function(data){
+        if (data.content === undefined) {
+          // fields are VALID
+          app.content.reload();
+        } else {
+          // fields are INVALID
+
+          // @todo stub only yet. Should make use of the placeQuickform func, which in his turn should allow POST method to submit form data
+          var fieldID = cont.data('quickform-container');
+          var quickform = $(data.content);
+          blockOtherFields(cont);
+          cont.html(quickform);
+          var quickformFields = quickform.find('[name]');
+          quickformFields.each(function(){
+            //we add the field id to the the field's names to prevent duplicate naming with fields from the surrounding main form.
+            $(this).attr('name', fieldID + '-' + $(this).attr('name'))
+          });
+          quickform.find('*[data-field]').each(function(i, element){
+            // run field's javascript
+            $(element)[$(element).data('field')]()
+          });
+        }
       }
     });
     return false
