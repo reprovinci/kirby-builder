@@ -105,34 +105,13 @@
     var data = $('.quickform form').serialize().split(fieldID + '-').join('');
     var url = $('.quickform form').attr('action');
     var urlParamSeparator = (url.indexOf('?') > -1) ? '&' : '?';
-    $.ajax({
-      type: "POST",
-      url: url + urlParamSeparator,
-      data: data,
-      success: function (data) {
-        if (data.content === undefined) {
-          // fields are VALID
-          app.content.reload();
-        } else {
-          // fields are INVALID
 
-          // @todo stub only yet. Should make use of the placeQuickform func, which in his turn should allow POST method to submit form data
-          var fieldID = cont.data('quickform-container');
-          var quickform = $(data.content);
-          blockOtherFields(cont);
-          cont.html(quickform);
-          var quickformFields = quickform.find('[name]');
-          quickformFields.each(function () {
-            //we add the field id to the the field's names to prevent duplicate naming with fields from the surrounding main form.
-            $(this).attr('name', fieldID + '-' + $(this).attr('name'))
-          });
-          quickform.find('*[data-field]').each(function (i, element) {
-            // run field's javascript
-            $(element)[$(element).data('field')]()
-          });
-        }
+    placeQuickform(url + urlParamSeparator, cont, function callback(data) {
+      if (data.content === undefined) {
+        app.content.reload();
       }
-    });
+    }, 'POST', data);
+
     return false
   });
 
@@ -142,11 +121,10 @@
     return mainSaveButton.closest('.buttons-centered');
   };
 
-  placeQuickform = function (formUrl, $container, callback, methodIn) {
+  placeQuickform = function (formUrl, $container, callback, methodIn, dataIn) {
     var method = methodIn !== undefined ? methodIn : 'GET';
-    console.log('method', method);
-    // return;
-    $.ajax({
+
+    var options = {
       url: formUrl,
       method: method,
       success: function (data) {
@@ -169,9 +147,17 @@
           $(element)[$(element).data('field')]()
         });
 
-        callback()
+        callback(data);
       }
-    });
+    };
+
+    if (dataIn != undefined) {
+      options.data = dataIn;
+    }
+
+    console.log('options',options);
+
+    $.ajax(options);
   };
 
   blockOtherFields = function ($container) {
