@@ -1,7 +1,7 @@
 # 1.1.1 (to be tagged) (Reprovinci)
-- [2018-01-15] fix for small/incorrect html of builder after movement or update without an actual move or change [a9503b9ac51ad9ba9a45c286ab179207fa1f3ae6]()
-- [2018-01-17] use the default way of loading snippets [ef8f461]()
-- [2018-??-??] fixed/added support for "required" and "validate" field options 
+- [2018-01-15] fix for small/incorrect html of builder after movement or update without an actual move or change
+- [2018-01-17] use the default way of loading snippets
+- [2018-02-26] fixed/added support for "required" and "validate" field options 
 
 # 1.1.0 (TimOetting, not tagged)
 
