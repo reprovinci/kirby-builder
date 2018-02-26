@@ -40,10 +40,10 @@ class BuilderField extends StructureField {
     $data->_fileUrl = $this->page->contentUrl() . DS;
     if ($this->snippet){
       $data = structure((array) $data, $this->page());
-      return tpl::load(c::get( 'buildersnippets.path', kirby()->roots()->snippets() ) . DS . $this->snippet . '.php', array(
+      return snippet($this->snippet, [
         'page' => $this->page(),
         'data' => $data,
-      ));
+      ], true);
     } else {
       return parent::entry($data);
     }
