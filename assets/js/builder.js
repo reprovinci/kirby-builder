@@ -155,8 +155,6 @@
       options.data = dataIn;
     }
 
-    console.log('options',options);
-
     $.ajax(options);
   };
 
