@@ -1,4 +1,7 @@
-# 1.1.1 (to be tagged) (Reprovinci)
+# 1.1.2 (Reprovinci)
+- [2018-03-12] removed a console.log
+
+# 1.1.1 (Reprovinci)
 - [2018-01-15] fix for small/incorrect html of builder after movement or update without an actual move or change
 - [2018-01-17] use the default way of loading snippets
 - [2018-02-26] fixed/added support for "required" and "validate" field options 
