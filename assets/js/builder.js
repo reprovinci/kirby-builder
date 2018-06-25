@@ -76,11 +76,14 @@
   };
   $(document).on('click', '.builder-entry [data-quickform]', function (e) {
     e.preventDefault();
+
+
     var formUrl = $(this).attr('data-href');
     var builderEntry = $(this).closest('.builder-entry');
     var builderEntryContent = builderEntry.find('.builder-entry-content');
     var builderEntryOptions = builderEntry.find('.builder-entry-options');
     var quickformContainer = builderEntry.find('.builder-entry-quickform-container');
+    
     placeQuickform(formUrl, quickformContainer, function () {
       builderEntryContent.addClass('hidden');
       builderEntryOptions.addClass('hidden');
@@ -128,6 +131,7 @@
       url: formUrl,
       method: method,
       success: function (data) {
+        disabledSidebarButtons();
         // $.get( formUrl, function( data ) {
         var mainButtonBar = getMainButtonBar();
         mainButtonBar.addClass('hidden');
@@ -156,6 +160,11 @@
     }
 
     $.ajax(options);
+  };
+
+  disabledSidebarButtons = function () {
+    console.log('disable sidebar buttons');
+    $('.sidebar a').addClass('btn-disabled');
   };
 
   blockOtherFields = function ($container) {
